@@ -5,7 +5,7 @@ import './CourseInput.css';
 
 const CourseInput = props => {
   const [enteredValue, setEnteredValue] = useState('');
-const [isValid, setIsValid] = useState(true);
+  const [isValid, setIsValid] = useState(true);
 
   const goalInputChangeHandler = event => {
     inputValidation();
@@ -14,17 +14,17 @@ const [isValid, setIsValid] = useState(true);
 
   const formSubmitHandler = event => {
     event.preventDefault();
-    inputValidation();
-    props.onAddGoal(enteredValue);
+    if (inputValidation())
+      props.onAddGoal(enteredValue);
   };
 
   const inputValidation = () => {
-    if(enteredValue.trim().length === 0){
+    if (enteredValue.trim().length === 0) {
       setIsValid(false);
-      return;
+      return false;
     }
     setIsValid(true);
-      return; 
+    return true;
   }
 
   return (
